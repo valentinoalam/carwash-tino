@@ -1,0 +1,287 @@
+@import 'tailwindcss';
+
+@source '../../*.{js,ts,jsx,tsx,mdx}';
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+}
+
+@utility text-balance {
+  text-wrap: balance;
+}
+
+@layer utilities {
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+  }
+}
+
+/* ===== :root/.dark updated with shadcnPlugin values ===== */
+@layer base {
+  :root {
+    --border: hsl(214.3 31.8% 91.4%);
+    --input: hsl(214.3 31.8% 91.4%);
+    --ring: hsl(222.2 84% 4.9%);
+    --background: hsl(0 0% 100%);
+    --foreground: hsl(222.2 84% 4.9%);
+
+    --primary: hsl(222.2 47.4% 11.2%);
+    --primary-foreground: hsl(210 40% 98%);
+
+    --secondary: hsl(210 40% 96%);
+    --secondary-foreground: hsl(222.2 84% 4.9%);
+
+    --destructive: hsl(0 84.2% 60.2%);
+    --destructive-foreground: hsl(210 40% 98%);
+
+    --muted: hsl(210 40% 96%);
+    --muted-foreground: hsl(215.4 16.3% 46.9%);
+
+    --accent: hsl(210 40% 96%);
+    --accent-foreground: hsl(222.2 84% 4.9%);
+
+    --popover: hsl(0 0% 100%);
+    --popover-foreground: hsl(222.2 84% 4.9%);
+
+    --card: hsl(0 0% 100%);
+    --card-foreground: hsl(222.2 84% 4.9%);
+
+    --favorite: hsl(45 93% 47%);
+    --advertiser: hsl(142 71% 45%);
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: hsl(215 50% 7%);
+    --foreground: hsl(213 31% 91%);
+    --muted: hsl(223 47% 11%);
+    --muted-foreground: hsl(215.4 16.3% 56.9%);
+    --accent: hsl(216 34% 17%);
+    --accent-foreground: hsl(210 40% 98%);
+    --popover: hsl(224 71% 4%);
+    --popover-foreground: hsl(215 20.2% 65.1%);
+    --secondary: hsl(222.2 47.4% 15%);
+    --secondary-foreground: hsl(210 40% 98%);
+    --border: hsl(216 34% 17%);
+    --input: hsl(216 34% 17%);
+    --card: hsl(224 71% 4%);
+    --card-foreground: hsl(213 31% 91%);
+    --destructive: hsl(0 80% 40%);
+    --ring: hsl(216 34% 17%);
+
+    --primary: hsl(0 0% 98%);
+    --primary-foreground: hsl(0 0% 9%);
+    --destructive-foreground: hsl(0 0% 98%);
+    --chart-1: hsl(220 70% 50%);
+    --chart-2: hsl(160 60% 45%);
+    --chart-3: hsl(30 80% 55%);
+    --chart-4: hsl(280 65% 60%);
+    --chart-5: hsl(340 75% 55%);
+    --sidebar-background: hsl(240 5.9% 10%);
+    --sidebar-foreground: hsl(240 4.8% 95.9%);
+    --sidebar-primary: hsl(224.3 76.3% 48%);
+    --sidebar-primary-foreground: hsl(0 0% 100%);
+    --sidebar-accent: hsl(240 3.7% 15.9%);
+    --sidebar-accent-foreground: hsl(240 4.8% 95.9%);
+    --sidebar-border: hsl(240 3.7% 15.9%);
+    --sidebar-ring: hsl(217.2 91.2% 59.8%);
+  }
+}
+
+/* ===== Updated base styles from shadcnPlugin ===== */
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+/*
+  ---break---
+*/
+
+@theme inline {
+  /* (No changes needed here - preserves existing mappings) */
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+
+  --color-favorite: var(--favorite);
+  --color-advertiser: var(--advertiser);
+
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+}
+
+
+/* ===== Oklch values removed as they conflict with HSL theme ===== */
+/* (Deleted entire :root/.dark oklch blocks - not compatible with HSL system) */
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+
+.bubble-shape-divider-top {
+  position: absolute;
+  width: 100%;
+  /* height: 100vw; */
+  transform: scaleX(-1);
+  -webkit-mask-size: contain, auto;
+  mask-size: contain, auto;
+  /* clip-path: inset(0% 0% 60% 0%); */
+  /* transform: rotate(180deg); */
+  background: #ffffff; /* Or any color you want the SVG to be */
+}
+
+.bubble-shape-divider-bottom {
+  /* bottom: -46%; */
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, #4ade80, #22d3ee, #ff6b6b, #4ecdc4);
+  /* color: #ffffff; */
+}
+
+/* Alternative approach using CSS mask with SVG */
+.bubble-mask, .bubble-shape-divider-mask {
+  position: absolute;
+  left: 0;
+  overflow: hidden;
+  line-height: 0;
+  -webkit-mask: url("/bubbles-bottom.svg") no-repeat;
+  mask: url("/bubbles-bottom.svg") no-repeat;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: top;
+  mask-position: top;
+}
+
+@media (max-width: 768px) {
+  /* .bubble-shape-divider-mask {
+      -webkit-mask-size: 100% 100%;
+      mask-size: 100% 100%;
+  } */
+  /* .bubble-shape-divider-top {
+    clip-path: inset(0% 0% 20% 0%);
+  } */
+}
+
+.process svg {
+    height: calc(10% + 1.3px);
+}
+
+.solution-top svg {
+  height: 92px;
+}
+
+
+/* .custom-shape-divider-bottom svg {
+  height: 42px;
+} */
+
+
+.bg-svg-bottom {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='353' height='304'%3E%3Cg fill='none' fill-rule='evenodd' stroke='%23D0D5F6' strokeWidth='2'%3E%3Cpath d='M180.29 759c102.087-21.62 155.232-61.312 159.437-119.074 6.307-86.643-231.598-17.186-136.358-198 95.241-180.813 181.318-185.29 136.358-298C294.767 31.216 174.04-27.954 33.79 16.8c-93.501 29.836-144.652 140.545-153.453 332.126'/%3E%3Cpath d='M138.3 759c80.083-18.988 121.774-53.846 125.072-104.575 4.948-76.093-181.679-15.094-106.966-173.89C231.118 321.738 298.64 317.808 263.372 218.82c-35.269-98.986-129.974-150.95-239.995-111.646C-49.97 133.378-90.096 230.605-97 398.859'/%3E%3Cpath d='M102.065 761c60.604-16.56 92.153-46.963 94.65-91.208 3.743-66.367-137.488-13.165-80.949-151.664 56.54-138.5 107.638-141.927 80.948-228.261-26.69-86.335-98.359-131.656-181.618-97.376C-40.41 215.345-70.775 300.145-76 446.892'/%3E%3C/g%3E%3C/svg%3E");
+  background-position: bottom left
+}
+
+.tab-active {
+  background-color: #2563eb;
+  color: white;
+}
+
+.service-card {
+  transition: all 0.3s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+

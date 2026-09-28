@@ -1,0 +1,7 @@
+
+/* styles/ShapeDivider.module.css or in your global CSS */
+.shape-divider {
+  position: relative;
+  background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+  overflow: hidden;
+}
