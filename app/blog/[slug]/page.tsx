@@ -3,7 +3,6 @@ import type { Metadata } from "next"
 import { allAuthors, allPosts } from "contentlayer/generated";
 import { getImage } from "@/lib/getImage"
 import { getPost } from "@/lib/getPost"
-// import AboutMe from "@/components/AboutMe"
 import { MDX } from "@/components/MDX"
 import { Skeleton } from "@/components/ui/skeleton"
 import Image from "next/image";
