@@ -21,7 +21,7 @@ const bookingSchema = z.object({
       year: z.number().min(2024),
     })
     .nullable()
-    .refine((date) => date !== null, {
+    .refine((date): date is NonNullable<typeof date> => date !== null, {
       message: "Silakan pilih tanggal",
     }),
   selectedTime: z.string().min(1, "Silakan pilih waktu"),
@@ -39,11 +39,11 @@ const bookingSchema = z.object({
     .min(5, "Nomor plat minimal 5 karakter")
     .regex(/^[A-Z0-9\s]+$/i, "Format plat nomor tidak valid"),
 })
-
+export type BookingFormInput = z.input<typeof bookingSchema>;
 type BookingFormData = z.infer<typeof bookingSchema>
 
 const BookingServicePage = () => {
-  const [formData, setFormData] = useState<Partial<BookingFormData>>({
+  const [formData, setFormData] = useState<Partial<BookingFormInput>>({
     selectedDate: null,
     selectedTime: "",
     selectedService: "",
@@ -248,7 +248,7 @@ const BookingServicePage = () => {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="flex items-center gap-4 p-4 bg-gradient-to-r from-blue-50 to-cyan-50 rounded-lg border border-blue-200">
+              <div className="flex items-center gap-4 p-4 bg-linear-to-r from-blue-50 to-cyan-50 rounded-lg border border-blue-200">
                 <div className="flex items-center justify-center rounded-lg bg-blue-100 size-12">
                   <MapPin size={24} className="text-blue-600" />
                 </div>
@@ -332,7 +332,7 @@ const BookingServicePage = () => {
               onClick={handleSubmit}
               disabled={isSubmitting}
               size="lg"
-              className="min-w-[200px] bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700"
+              className="min-w-50 bg-linear-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700"
             >
               {isSubmitting ? "Memproses..." : "Konfirmasi Janji Temu"}
             </Button>
