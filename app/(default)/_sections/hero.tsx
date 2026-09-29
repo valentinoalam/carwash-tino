@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import ShapeDivider from '@/components/shape-divider';
 import Link from 'next/link';
+import BorderBeam from 'border-beam';
 const hero = () => {
   const imageUrl = "https://lh3.googleusercontent.com/aida-public/AB6AXuC2kEQOPSHO76WVnHneOBu4DmbEFLgIp_94YmaTiQcOlCcSfDrqZU5qNhDBz7ZYOIGRF3tpoKUHsTJM3gnm1ZmNu2Kvu1sUKXCMF4dxwFYUpM6tJGACP25bEfsUzJg1tGeXrpWRy2pPU75C9PaIxEvvoYXh9_pbjUsOJNbod7tk3-3ZpkHwGyT4raBp1b3pDPRzDp12rHodlAZPsuCBTlD2rLs21a-qRH20V4nP-ZM2LGnUUO-Vlfle0NB9lLizTbQdyKsja7HQKRTl";
 
@@ -8,7 +9,7 @@ const hero = () => {
     <div className="@container">
       <div className="@[480px]:p-4">
         <div
-          className="relative flex min-h-[480px] flex-col gap-6 bg-cover bg-center bg-no-repeat @[480px]:gap-8 @[480px]:rounded-xl items-start overflow-clip justify-end px-4 pb-10 @[480px]:px-10"
+          className="relative flex min-h-120 flex-col gap-6 bg-cover bg-center bg-no-repeat @[480px]:gap-8 @[480px]:rounded-xl items-start overflow-clip justify-end px-4 pb-10 @[480px]:px-10"
         >
           <video
             autoPlay
@@ -31,7 +32,7 @@ const hero = () => {
             <ShapeDivider className={"z-10 h-[100vw] bottom-0 opacity-45 mix-blend-exclusion"} position="bottom" />
           </div>
           
-          <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-black/10 rounded-xl -z-10" />
+          <div className="absolute inset-0 bg-linear-to-t from-black/40 to-black/10 rounded-xl -z-10" />
           
           <div className="flex flex-col z-10 max-w-4xl mx-auto items-center gap-4 text-center">
             <h1
@@ -43,10 +44,28 @@ const hero = () => {
               Mobil bersih, hati senang. Layanan cuci mobil profesional dengan hasil terbaik.
             </h2>
           </div>
-          <Link href={'/bookimg'}
-            className="py-4 z-10 mx-auto transition-all ease-in-out duration-300 hover:border-2 hover:border-white/50 hover:bg-[#309be8]/80 hover:text-lg hover:py-9 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-transparent shadow-2xl flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-[#309be8] text-slate-50 text-sm font-bold leading-normal tracking-[0.015em] @[480px]:text-base @[480px]:font-bold @[480px]:leading-normal @[480px]:tracking-[0.015em]"
+          
+          <Link href={'/booking'} className='mx-auto z-30'
           >
-            <span className="truncate">Pesan Sekarang</span>
+          <BorderBeam
+            active={true}
+            brightness={1.3}
+            className="py-4 z-10 hover:bg-[#309be8]/80 flex min-w-21 max-w-120 transition-all ease-in-out duration-300 hover:border-2 rounded-full hover:border-white/50 hover:text-lg  focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-transparent shadow-2xl cursor-pointer items-center justify-center overflow-hidden h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-[#309be8]"
+            colorVariant="colorful"
+            duration={19.6 / 3.1 / 2.3}
+            hueRange={30}
+            // onActivate={onActivate}
+            // onDeactivate={onDeactivate}
+            // ref={ref}
+            saturation={1.7}
+            size="md"
+            staticColors={false}
+            strength={2}
+            // style={borderBeamStyle}
+            theme="dark"
+          >
+            <span className="text-slate-50 text-sm font-bold leading-normal tracking-[0.015em] @[480px]:text-base @[480px]:font-bold @[480px]:leading-normal @[480px]:tracking-[0.015em] truncate">Pesan Sekarang</span>
+          </BorderBeam>
           </Link>
         </div>
       </div>
