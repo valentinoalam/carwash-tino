@@ -23,6 +23,15 @@ const SectionPlaceholder = ({ minHeight = 300 }: { minHeight?: number }) => (
   />
 );
 const BusinessProfile = () => {
+    const car = {
+    "booking": "1car-dirty",
+    "about-us": "2car-rinsed",
+    "gallery": "3car-soapy",
+    "certificates": "4car-clean",
+    "reviews": "5car-polished",
+  } as const;
+  type TabKey = keyof typeof car;
+
   const [searchTerm, setSearchTerm] = useState("")
   const [selectedService, setSelectedService] = useState<string>("")
   const [activeTab, setActiveTab] = useState("booking")
@@ -32,7 +41,6 @@ const BusinessProfile = () => {
   const [carWidth, setCarWidth] = useState(0)
   const tabsRef = useRef<HTMLDivElement>(null)
   const tabRefs = useRef<{[key: string]: HTMLButtonElement | null}>({})
-
   const updateBlobPosition = () => {
     if (!tabsRef.current) return;
 
@@ -229,7 +237,7 @@ const BusinessProfile = () => {
       <Tabs onValueChange={setActiveTab} defaultValue="booking" className="w-full relative">
         <div className=' min-h-42 w-full relative'>
           <div className='absolute opacity-90 inset-0 h-full w-full flex overflow-visible -z-50'>
-            <div className={cn(`bubble-shape-divider-top bubble-shape-divider-mask`, "top-0 md:-top-[10%] lg:-top-[65%] w-full h-full sm:h-[100vw] [clip-path:inset(0%_0%_20%_0%)] sm:[clip-path:inset(0%_0%_40%_0%)] lg::[clip-path:inset(0%_0%_60%_0%)]")}></div>
+            <div className={cn(`bubble-shape-divider-top bubble-shape-divider-mask`, "top-0 md:top-[-10%] lg:top-[-65%] w-full h-full sm:h-[100vw] [clip-path:inset(0%_0%_20%_0%)] sm:[clip-path:inset(0%_0%_40%_0%)] lg::[clip-path:inset(0%_0%_60%_0%)]")}></div>
 
             <div className="bg-white absolute bottom-0 left-0 w-full h-[20%] basis-1/3 grow rounded-lg shadow-lg"></div>
           </div>
@@ -241,7 +249,7 @@ const BusinessProfile = () => {
               {/* Animated Blob */}
               <div
                 ref={blobRef}
-                className="absolute transition-all duration-500 ease-out bg-gradient-to-r translate-y-1 from-[#309be8] to-white rounded-md shadow-lg z-0"
+                className="absolute transition-all duration-500 ease-out bg-linear-to-r translate-y-1 from-[#309be8] to-white rounded-md shadow-lg z-0"
                 style={{
                   ...blobStyle,
                   top: '0px',
@@ -251,13 +259,13 @@ const BusinessProfile = () => {
               <div 
                 className="absolute bottom-full z-0 transition-all duration-500 ease-in-out"
                 style={{ 
-                  transform: `translateX(${carPosition-30}px)`,
+                  transform: `translateX(${carPosition-40}px) translateY(10px)`,
                   width: `${carWidth}px`
                 }}
               >
                 <div className="relative w-full flex justify-center -mb-1">
                   <Image
-                    src="/illustration/cars/caro.svg"
+                    src={`/illustration/cars/caro/${car[activeTab as TabKey]}.png`}
                     alt="car"
                     width={100}
                     height={100}
@@ -337,7 +345,7 @@ const BusinessProfile = () => {
             </div>
 
             {/* Special Offers */}
-            <div className="bg-gradient-to-r from-blue-600 to-[#309be8] rounded-lg p-6 text-white">
+            <div className="bg-linear-to-r from-blue-600 to-[#309be8] rounded-lg p-6 text-white">
               <div className="flex justify-between items-center mb-4">
                 <h2 className="text-2xl font-bold">Special Offers</h2>
                 <Button suppressHydrationWarning variant="ghost" size="icon" className="text-white hover:bg-white/20">
@@ -345,7 +353,7 @@ const BusinessProfile = () => {
                 </Button>
               </div>
               <div>
-                <div className="shadow-md hover:shadow-lg transition-shadow bg-gradient-to-r from-yellow-50 to-orange-50 border-2 border-yellow-300 rounded-xl p-6 mb-6">
+                <div className="shadow-md hover:shadow-lg transition-shadow bg-linear-to-r from-yellow-50 to-orange-50 border-2 border-yellow-300 rounded-xl p-6 mb-6">
                   <div className="flex items-center justify-between">
                     <div>
                       <h3 className="text-xl font-bold text-gray-900 mb-2">Summer Special Package</h3>
