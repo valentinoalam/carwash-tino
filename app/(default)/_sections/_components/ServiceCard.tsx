@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { Service } from "@/lib/catalog";
+import { Service } from "@/data/catalog";
 import { fmt, rnd } from "@/lib/format";
 
 // Efek "hapus debu" di panel tiap kartu servis. Ini port langsung dari fungsi
