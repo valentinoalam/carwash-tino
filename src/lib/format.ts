@@ -1,4 +1,4 @@
-import { CFG, Service, Vehicle } from "./data";
+import { CFG, Service, Vehicle } from "@/data/catalog";
 
 export function fmt(n: number): string {
   return (
@@ -11,7 +11,7 @@ export function fmt(n: number): string {
 }
 
 export function price(svc: Service, veh: Vehicle): number {
-  return Math.round((svc.base * veh.mult) / 5000) * 5000;
+  return Math.round((svc.price * veh.mult) / 5000) * 5000;
 }
 
 export function waLink(text: string): string {

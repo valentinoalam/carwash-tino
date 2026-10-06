@@ -54,19 +54,19 @@ function pricing() {
             <tbody>
               {services.map((service, index) => (
                 <tr key={index} className="border-t border-t-[#d0dde7]">
-                  <td className="h-[72px] px-4 py-2 text-sm font-normal leading-normal text-[#0e151b] @container-[400px]:w-[400px]">
+                  <td className="h-18 px-4 py-2 text-sm font-normal leading-normal text-[#0e151b] @container-[400px]:w-[400px]">
                     {service.layanan}
                   </td>
-                  <td className="h-[72px] px-4 py-2 text-sm font-normal leading-normal text-[#4e7997] @container-[240px]:w-[400px]">
+                  <td className="h-18 px-4 py-2 text-sm font-normal leading-normal text-[#4e7997] @container-[240px]:w-[400px]">
                     {service.deskripsi}
                   </td>
-                  <td className="h-[72px] px-4 py-2 text-sm font-normal leading-normal text-[#4e7997] @container-[360px]:w-[400px]">
+                  <td className="h-18 px-4 py-2 text-sm font-normal leading-normal text-[#4e7997] @container-[360px]:w-[400px]">
                     {service.fitur}
                   </td>
-                  <td className="h-[72px] px-4 py-2 text-sm font-normal leading-normal text-[#4e7997] @container-[480px]:w-[400px]">
+                  <td className="h-18 px-4 py-2 text-sm font-normal leading-normal text-[#4e7997] @container-[480px]:w-[400px]">
                     {service.harga}
                   </td>
-                  <td className="h-[72px] px-4 py-2 text-sm font-bold leading-normal tracking-[0.015em] text-[#4e7997] @container-[600px]:w-60">
+                  <td className="h-18 px-4 py-2 text-sm font-bold leading-normal tracking-[0.015em] text-[#4e7997] @container-[600px]:w-60">
                     {service.detail}
                   </td>
                 </tr>

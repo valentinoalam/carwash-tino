@@ -1,5 +1,5 @@
 export const SITE_CONFIG = {
-  brand: 'Kilap',
-  waNumber: '6281200000000',
+  brand: 'Shine Car Wash',
+  waNumber: '6285798079847',
   currency: 'Rp',
 };

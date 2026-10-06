@@ -3,15 +3,31 @@
 import Link from 'next/link'
 import { ArrowRight, Menu, X } from 'lucide-react'
 import { useState, useEffect } from 'react'
+import dynamic from 'next/dynamic'
 import { Button } from '@shadcn/button'
 import Logo from './logo'
 import { cn } from '@/lib/utils'
 import navLinks from '@/data/headerNavLinks'
-import RealButton from '@shadcn/realButton'
-import NeumorphButton from '@shadcn/neumorph-button'
+// import RealButton from '@shadcn/realButton'
+// import NeumorphButton from '@shadcn/neumorph-button'
+import { useRouter } from 'next/navigation'
+import { CustomerLoginDialog } from './LoginDialog'
+import { OPEN_LOGIN_EVENT, clearProfile, useCustomerProfile } from "@/lib/customer-profile";
+const RealButton = dynamic(() => import('@shadcn/realButton'), { ssr: false });
+const NeumorphButton = dynamic(() => import('@shadcn/neumorph-button'), { ssr: false });
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
+  const router = useRouter();
+  const profile = useCustomerProfile();
+  const [loginOpen, setLoginOpen] = useState(false);
+ 
+  // Tombol "Masuk" di halaman Book meminta Header membuka dialog.
+  useEffect(() => {
+    const open = () => setLoginOpen(true);
+    window.addEventListener(OPEN_LOGIN_EVENT, open);
+    return () => window.removeEventListener(OPEN_LOGIN_EVENT, open);
+  }, []);
 
   // Handle scroll effect
   useEffect(() => {
@@ -46,7 +62,7 @@ const Header = () => {
 
   return (
     <>
-      <header className={`fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-[99.5%] max-w-6xl px-4 transition-all duration-300 ${
+      <header className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[99.5%] max-w-6xl px-4 transition-all duration-300 ${
         isScrolled ? 'top-2' : 'top-8'
       }`}>
         <div className={`backdrop-blur-md rounded-4xl border px-6 py-2 flex items-center justify-between transition-all duration-300 ${
@@ -76,12 +92,12 @@ const Header = () => {
 
           {/* Desktop Action Buttons */}
           <div className="hidden md:flex items-center gap-3 space-x-1.5">
-            <RealButton onClick={()=>{}}
-              className="text-sm bg-[#309be8]/60 cursor-pointer text-white hover:bg-[#afd0e8]/80 hover:scale-105 rounded-xl px-5 py-2.5 font-medium border border-primary-200/50 transition-all duration-200"
-            >
-              Sign In
-            </RealButton>
-            <NeumorphButton intent={isScrolled ? "primary" : "default"}  onClick={()=>{}} className={cn("items-center justify-center whitespace-nowrap text-sm w-max cursor-pointer bg-linear-to-r from-primary-600 to-primary-700 hover:bg-primary-50/80 text-primary-foreground hover:from-primary-700 hover:to-primary-800 hover:scale-105 rounded-l-xl rounded-r-2xl px-5 py-2.5 font-medium shadow-lg hover:shadow-xl transition-all duration-300 group",
+            {profile ? (
+              <RealButton  onClick={() => clearProfile()} className="text-sm bg-[#309be8]/60 cursor-pointer text-white hover:bg-[#afd0e8]/80 hover:scale-105 rounded-xl px-5 py-2.5 font-medium border border-primary-200/50 transition-all duration-200">Sign Out</RealButton>
+            ) : (
+              <RealButton onClick={() => setLoginOpen(true)} className="text-sm bg-[#309be8]/60 cursor-pointer text-white hover:bg-[#afd0e8]/80 hover:scale-105 rounded-xl px-5 py-2.5 font-medium border border-primary-200/50 transition-all duration-200">Sign In</RealButton>
+            )}
+            <NeumorphButton intent={isScrolled ? "primary" : "default"}  onClick={()=>{router.push('/booking');}} className={cn("items-center justify-center whitespace-nowrap text-sm w-max cursor-pointer bg-linear-to-r from-primary-600 to-primary-700 hover:bg-primary-50/80 text-primary-foreground hover:from-primary-700 hover:to-primary-800 hover:scale-105 rounded-l-xl rounded-r-2xl px-5 py-2.5 font-medium shadow-lg hover:shadow-xl transition-all duration-300 group",
               isScrolled ? 'bg-linear-to-r from-[#309be8]/60 via-10% via-[#2998e8]/80 to-advertiser' : ''
             )}>
               Book Now <ArrowRight className="hidden sm:flex ml-2 h-4 w-4 group-hover:translate-x-0.5 transition-transform duration-200" />
@@ -119,7 +135,7 @@ const Header = () => {
         {/* Mobile Menu Panel */}
         <div className={`absolute w-full transition-all duration-300
           top-16 left-1/2 transform -translate-x-1/2 max-w-[90vw] mx-auto
-           z-40 bg-[repeating-linear-gradient(#3a3d46_0_58px,#2a2c33_58px_64px)] 
+          z-40 bg-[repeating-linear-gradient(#3a3d46_0_58px,#2a2c33_58px_64px)] 
           ease-[cubic-bezier(.7,0,.2,1)] pt-[calc(env(safe-area-inset-top,0px)+18px)] flex flex-col 
           backdrop-blur-xl rounded-xl sm:rounded-2xl border border-gray-200/50 shadow-2xl 
           ${isMobileMenuOpen ? 'translate-y-0 opacity-100 scale-100' : 'translate-y-4 opacity-0 scale-95'}`}>
@@ -156,12 +172,22 @@ const Header = () => {
               </Link>
             ))}
               <div className='pt-5 justify-self-end-safe space-x-5'>
-                <Button onClick={()=>{}}
-                  className="text-sm bg-[#309be8]/60 cursor-pointer text-white hover:bg-[#afd0e8]/80 hover:scale-105 rounded-xl px-5 py-2.5 font-medium border border-primary-200/50 transition-all duration-200"
-                >
-                  Sign In
+                {profile ? (
+              <Button  onClick={() => clearProfile()} className="text-sm bg-[#309be8]/60 cursor-pointer text-white hover:bg-[#afd0e8]/80 hover:scale-105 rounded-xl px-5 py-2.5 font-medium border border-primary-200/50 transition-all duration-200">Sign Out</Button>
+            ) : (
+              <Button onClick={() => setLoginOpen(true)} className="text-sm bg-[#309be8]/60 cursor-pointer text-white hover:bg-[#afd0e8]/80 hover:scale-105 rounded-xl px-5 py-2.5 font-medium border border-primary-200/50 transition-all duration-200">Sign In</Button>
+            )}
+                <Button onClick={()=>{
+                  if(profile){
+                    clearProfile();
+                  } else {
+                    setLoginOpen(true);
+                  }
+                }} 
+                  className="text-sm bg-[#309be8]/60 cursor-pointer text-white hover:bg-[#afd0e8]/80 hover:scale-105 rounded-xl px-5 py-2.5 font-medium border border-primary-200/50 transition-all duration-200">
+                  {profile ? 'Sign Out' : 'Sign In'}
                 </Button>
-                <Button  onClick={()=>{}} className={cn("items-center justify-center whitespace-nowrap text-sm w-max cursor-pointer bg-linear-to-r from-primary-600 to-primary-700 hover:bg-primary-50/80 text-primary-foreground hover:from-primary-700 hover:to-primary-800 hover:scale-105 rounded-l-xl rounded-r-2xl px-5 py-2.5 font-medium shadow-lg hover:shadow-xl transition-all duration-300 group",
+                <Button  onClick={()=>{router.push('/booking');}} className={cn("items-center justify-center whitespace-nowrap text-sm w-max cursor-pointer bg-linear-to-r from-primary-600 to-primary-700 hover:bg-primary-50/80 text-primary-foreground hover:from-primary-700 hover:to-primary-800 hover:scale-105 rounded-l-xl rounded-r-2xl px-5 py-2.5 font-medium shadow-lg hover:shadow-xl transition-all duration-300 group",
                   isScrolled ? 'bg-linear-to-r from-[#309be8]/60 via-10% via-advertiser/80 to-advertiser' : ''
                 )}>
                   Book Now <ArrowRight className="hidden sm:flex ml-2 h-4 w-4 group-hover:translate-x-0.5 transition-transform duration-200" />
@@ -171,7 +197,8 @@ const Header = () => {
           </div>
         </div>
       </div>
-
+      <CustomerLoginDialog open={loginOpen} onClose={() => setLoginOpen(false)} />
+      
       <style jsx>{`
         @keyframes slideInFromRight {
           from {

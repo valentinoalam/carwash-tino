@@ -5,7 +5,7 @@ const navLinks = [
   // {
   //   label: "Services",
   //   href: "/services",
-  //   style: "shadow-[5px_5px_0_#ffd400] -rotate-1",
+  //   style: "bg-blue-500 shadow-[5px_5px_0_#ffd400] -rotate-1",
   // },
   // {
   //   label: "Contact",

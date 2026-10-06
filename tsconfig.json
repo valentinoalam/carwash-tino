@@ -35,7 +35,6 @@
     ".next/types/**/*.ts",
     ".contentlayer/generated",
     ".next/dev/types/**/*.ts",
-    "**/*.mts"
-  ],
+    "**/*.mts", "scripts/updateGallery.js"  ],
   "exclude": ["node_modules"]
 }
