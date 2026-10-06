@@ -21,7 +21,7 @@ export const DEFAULT_CATALOG: Catalog = {
     flag: s.flag || "",
   })),
   branches: BRANCHES.map((b) => ({
-    id: b.id,
+    id: String(b.id),
     name: b.name,
     address: b.address,
     phone: b.phone ?? "0812 0000 0000",
